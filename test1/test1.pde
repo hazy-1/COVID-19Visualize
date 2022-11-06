@@ -76,15 +76,21 @@ void drawPoints() {
     rect(50, displayHeight/3-50, displayWidth-50-50, displayHeight-displayHeight/3);
     
     for(int i = 0; i < tableLength; i++) {
-        strokeWeight(2);
+        
         colorMode(HSB);
 
-        for(int j = 0; j < labelNum; j++) {
-           if( label[j].equals(title[i]) ) stroke(40+j, 90, 80);
-        }
+   
 
         x = map(divergence[i], 0, 93, 50, displayWidth-50);
         y = map(i, 0, tableLength, displayHeight/3, displayHeight-50);
+        strokeWeight(2.5);
+        stroke(0, 0, 100);
+        point(x, y);
+
+        strokeWeight(2);
+        for(int j = 0; j < labelNum; j++) {
+           if( label[j].equals(title[i]) ) stroke(40+j, 90, 80);
+        }
         point(x, y);
     }
 }
