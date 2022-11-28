@@ -13,6 +13,7 @@ float dist = 0;
 
 //日付
 String[] period;  
+String[] country;
 Calendar cal; 
 String[] periodList;
 int dateNum;
@@ -27,6 +28,7 @@ int cladeListNum;
 
 void setup() {
     fullScreen();
+    frameRate(4);
     // size(500, 500);
     pixelDensity(displayDensity());
 
@@ -49,5 +51,7 @@ void draw() {
     covidmap.dispMap();
     ui.dispInfoCircle();
     ui.scrollBar();
+    ui.divergenceMemory();
     image(mapPos, 0, dist);
+    // ui.scallBar();
 }

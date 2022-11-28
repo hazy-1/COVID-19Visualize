@@ -24,6 +24,9 @@ class CovidMap {
         cal = Calendar.getInstance();
         cal.set(2019, 11, 28);
 
+        //国ラベルの初期化
+        country = new String[tableLength];
+
         pointCoord = new PVector[tableLength]; 
 
         mapPos.beginDraw();
@@ -64,6 +67,10 @@ class CovidMap {
             data = strains.getString(i, 2);
             period[i-1] = data;
 
+            //国の抽出
+            data = strains.getString(i, 4);
+            country[i-1] = data;
+
             //cladeListのセット
             for(int j = 0; j < counter; j++) {
                 if( cladeList[j].equals(strains.getString(i, 8)) ) matchFlag = true;
@@ -90,16 +97,35 @@ class CovidMap {
                     dateMapper = j;
                 }
             }     
-            pointCoord[i] = new PVector( map(divergence[i], 0, 93, offset, displayWidth - offset), map(dateMapper, 0, dateNum, offset+100, displayY-offset));
+            pointCoord[i] = new PVector( map(divergence[i], 0, 93, offset, displayWidth - offset), map(dateMapper, 0, dateNum, offset+150, displayY-offset));
         }
     }
 
     void dispMap() {
         mapPos.beginDraw();
         mapPos.background(360, 100, 100, 0);
-        mapPos.strokeWeight(7);
-        for(int i = 0; i < tableLength; i++) {       
-            for(int j = 0; j < cladeListNum; j++) {
+        for(int i = 0; i < tableLength; i++ ) {     
+                mapPos.strokeWeight(1);
+                mapPos.stroke(0, 0, 50);
+                mapPos.textAlign(RIGHT);
+            if(period[i].equals("2020/01/01")) {
+                mapPos.textFont(title);
+                mapPos.text(2020, displayWidth-45, pointCoord[i].y-10);
+                mapPos.line(10, pointCoord[i].y-8, displayWidth-50, pointCoord[i].y-8);
+            }
+            else if(period[i].equals("2021/01/01")) {
+                mapPos.textFont(title);
+                mapPos.text(2021, displayWidth-45, pointCoord[i].y-10);
+                mapPos.line(10, pointCoord[i].y-8, displayWidth-50, pointCoord[i].y-8);
+            }
+            else if(period[i].equals("2022/01/01")) {
+                mapPos.textFont(title);
+                mapPos.text(2022, displayWidth-50, pointCoord[i].y-10);
+                mapPos.line(10, pointCoord[i].y-8, displayWidth-50, pointCoord[i].y-8);
+            }
+
+            mapPos.strokeWeight(7);
+            for(int j = 0; j < cladeListNum; j++) {                
                 if( cladeList[j].equals(clade[i]) ) mapPos.stroke(j*10, 90, 80);
             }
             mapPos.point(pointCoord[i].x, pointCoord[i].y);
