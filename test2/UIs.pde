@@ -60,23 +60,18 @@ class UIs {
                     //     }
 
                     // }
-                    x = r * ((s1Divergence[listNum]+1)*0.5) * cos(theta) + displayWidth-(displayHeight/2+25);
-                    y = r * ((s1Divergence[listNum]+1)*0.5) * sin(theta) + displayHeight/2;                    
+                    x = r * ((s1Divergence[listNum]+1)*0.2) * cos(theta) + displayWidth-(displayHeight/2+25);
+                    y = r * ((s1Divergence[listNum]+1)*0.2) * sin(theta) + displayHeight/2;                    
                     curveVertex(x, y);
                 }
             endShape();
+            fill(0, 0, 100);
 
-            // stroke(0, 0 ,100);
-            // strokeWeight(2);
-            // noFill();
-            // line( (displayWidth-((displayHeight-100)/2+50)) - (r *((s1Divergence[listNum]+1)*0.5)), displayHeight/2, (displayWidth-((displayHeight-100)/2)), displayHeight/2);
-            // fill(0, 0, 100);
-
-            // textFont(title);
-            // textAlign(RIGHT);
-            // text("name", displayWidth-((displayHeight-100)/2+50), displayHeight/2-50);
-            // textFont(number);
-            // text(name[listNum], displayWidth-((displayHeight-100)/2+50), displayHeight/2-25);
+            textFont(title);
+            textAlign(RIGHT);
+            text("name", displayWidth-((displayHeight-100)/2+50), displayHeight/2-50);
+            textFont(number);
+            text(name[listNum], displayWidth-((displayHeight-100)/2+50), displayHeight/2-25);
 
             textFont(title);
             textAlign(RIGHT);
@@ -166,8 +161,5 @@ class UIs {
         if(trigger) {
             scallPointPos.set( mouseX, scallPointPos.y );
         }
-    }
-
-    void circleScallLine() {
     }
 }
