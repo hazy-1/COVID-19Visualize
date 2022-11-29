@@ -1,11 +1,12 @@
 class CovidMap {
-    Table strains;    
+    // Table strains;    
 
     CovidMap() {
         displayY = displayHeight*10;
         mapPos = createGraphics(displayWidth, displayHeight*10);  
         // mapPos = createGraphics(displayWidth, 4000);  
-        strains = loadTable("../data/strains3.csv"); 
+        // strains = loadTable("../data/strains3.csv"); 
+        strains = loadTable("../data/strains5.csv"); 
         tableLength = strains.getRowCount()-1;
 
         //系統の初期設定
@@ -15,6 +16,8 @@ class CovidMap {
 
         //世代の初期設定
         divergence = new float[tableLength];
+        //s1の初期設定
+        s1Divergence = new float[tableLength];
 
         //日付の初期設定
         period = new String[tableLength];
@@ -26,7 +29,7 @@ class CovidMap {
 
         //国ラベルの初期化
         country = new String[tableLength];
-
+        
         pointCoord = new PVector[tableLength]; 
 
         mapPos.beginDraw();
@@ -58,6 +61,10 @@ class CovidMap {
             //世代数の抽出
             data = strains.getString(i, 7);
             divergence[i-1] = float(data);
+
+            //世代数の抽出
+            data = strains.getString(i, 11);
+            s1Divergence[i-1] = float(data);
 
             //系統の抽出
             data = strains.getString(i, 8);
@@ -98,6 +105,7 @@ class CovidMap {
                 }
             }     
             pointCoord[i] = new PVector( map(divergence[i], 0, 93, offset, displayWidth - offset), map(dateMapper, 0, dateNum, offset+150, displayY-offset));
+            // pointCoord[i] = new PVector( map(s1Divergence[i], 0, 33, offset, displayWidth - offset), map(dateMapper, 0, dateNum, offset+150, displayY-offset));
         }
     }
 

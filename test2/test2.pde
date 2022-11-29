@@ -2,10 +2,12 @@ import java.util.Calendar;
 
 CovidMap covidmap;
 UIs ui;
+Mutations mutations;
 
 PGraphics mapPos;
 PVector[] pointCoord;
 PFont title, number;
+Table strains;    
 
 int tableLength;
 int displayX, displayY;
@@ -20,14 +22,23 @@ int dateNum;
 
 //世代数
 float[] divergence;
+//S1の世代数
+float[] s1Divergence;
+
 //系統
 String[] clade;
 //系統list
 String[] cladeList;
 int cladeListNum;
 
+//ミュータント遺伝子情報
+String[][] mutData;
+
+//S1orDivergenceの切り替え
+int switchFlag = 0;
+
 void setup() {
-    fullScreen();
+     fullScreen(2);
     frameRate(4);
     // size(500, 500);
     pixelDensity(displayDensity());
@@ -43,7 +54,10 @@ void setup() {
     covidmap.loadData();
     covidmap.setData();
 
+    mutations = new Mutations();
     ui = new UIs();
+
+    mutations.loadData();
 }
 
 void draw() {

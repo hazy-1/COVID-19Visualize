@@ -21,8 +21,19 @@ class UIs {
     void dispInfoCircle() {
         colorMode(HSB, 360, 100, 100);
         
+        int sDataNum = 500;
+
+        // シータ
+        float theta;
+        // 円の半径
+        float r = 300;
+        //円の各点の座標
+        float x = 0;
+        float y = 0;
+        
         int listNum = calcCollision();
         int label = 0;
+
         if(listNum != -1) {
             for(int j = 0; j < cladeListNum; j++) {
                 if( cladeList[j].equals(clade[listNum]) ) {
@@ -32,7 +43,28 @@ class UIs {
             }
 
             noStroke();
-            ellipse(displayWidth-((displayHeight-100)/2+50), displayHeight/2, displayHeight-50, displayHeight-50);
+            beginShape();
+                for(int i = 0; i < sDataNum+2; i++){
+                    theta = radians( map(i, 0, sDataNum+2, 0, 360) );
+                    if(!mutData[listNum][0].equals("0")){
+                        // println("yes");
+                        for(int j = 0; j < mutData[listNum].length; j++){
+                            String[] mutDataSpliter = mutData[listNum][j].split(",");
+                            if(int(mutDataSpliter[0]) == i ) {
+                                // println("yes");
+                                r = map(float(mutDataSpliter[1]), 1, 27, 300, (displayHeight-50)/2);
+                                break;
+                            }
+                            else r = 300;
+                        }
+
+                    }
+                    x = r  * cos(theta) + displayWidth-(displayHeight/2+25);
+                    y = r  * sin(theta) + displayHeight/2;                    
+                    curveVertex(x, y);
+                }
+            endShape();
+            // ellipse(displayWidth-((displayHeight-100)/2+50), displayHeight/2, displayHeight-50, displayHeight-50);
 
             fill(0, 0, 100);
             textFont(title);
@@ -62,14 +94,13 @@ class UIs {
         if(mousePressed) {
                 dist = -1*(map(mouseY, 0, displayHeight, -0, displayY-displayHeight));
                 ellipse(10, mouseY, 10, 10);
-
         }
     }
 
     void divergenceMemory() {
         int x;
         basePosX = 45;
-        basePosY = 120;
+        basePosY = 60;
         textAlign(LEFT);
         textFont(title);
         fill(0, 0, 100);

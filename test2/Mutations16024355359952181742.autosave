@@ -1,0 +1,22 @@
+class Mutations {
+    Mutations() {
+        //ミュータントの初期設定
+        mutList = new String[tableLength];
+    }
+
+    void loadData() {
+        String data;
+
+        for(int i = 1; i < tableLength; i++) {
+            data = strains.getString(i, 11);
+
+            if(data == "") {
+                println("yes!!");
+            }
+
+            mutList[i-1] = data;
+
+             //println(mutList[0]);
+        }
+    }
+}
