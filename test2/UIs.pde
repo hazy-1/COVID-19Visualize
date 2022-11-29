@@ -21,7 +21,7 @@ class UIs {
     void dispInfoCircle() {
         colorMode(HSB, 360, 100, 100);
         
-        int sDataNum = 500;
+        int sDataNum = 23605-21569;
 
         // シータ
         float theta;
@@ -46,27 +46,38 @@ class UIs {
             beginShape();
                 for(int i = 0; i < sDataNum+2; i++){
                     theta = radians( map(i, 0, sDataNum+2, 0, 360) );
-                    if(!mutData[listNum][0].equals("0")){
-                        // println("yes");
-                        for(int j = 0; j < mutData[listNum].length; j++){
-                            String[] mutDataSpliter = mutData[listNum][j].split(",");
-                            if(int(mutDataSpliter[0]) == i ) {
-                                // println("yes");
-                                r = map(float(mutDataSpliter[1]), 1, 27, 300, (displayHeight-50)/2);
-                                break;
-                            }
-                            else r = 300;
-                        }
+                    // if(!mutData[listNum][0].equals("0")){
+                    //     for(int j = 0; j < mutData[listNum].length; j++){
+                    //         String[] mutDataSpliter = mutData[listNum][j].split(",");
+                    //         if(int(mutDataSpliter[0]) >= 21569 && int(mutDataSpliter[0]) <= 23605) {
+                    //             if(map(float(mutDataSpliter[0]), 21569, 23605, 0, sDataNum) == float(i)){
+                    //                 println("yes");
+                    //                 r = map(float(mutDataSpliter[1]), 1, 27, 500, (displayHeight-50)/2);
+                    //                 break;
+                    //             }
+                    //         }
+                    //         else r = 300;
+                    //     }
 
-                    }
-                    x = r  * cos(theta) + displayWidth-(displayHeight/2+25);
-                    y = r  * sin(theta) + displayHeight/2;                    
+                    // }
+                    x = r * ((s1Divergence[listNum]+1)*0.5) * cos(theta) + displayWidth-(displayHeight/2+25);
+                    y = r * ((s1Divergence[listNum]+1)*0.5) * sin(theta) + displayHeight/2;                    
                     curveVertex(x, y);
                 }
             endShape();
-            // ellipse(displayWidth-((displayHeight-100)/2+50), displayHeight/2, displayHeight-50, displayHeight-50);
 
-            fill(0, 0, 100);
+            // stroke(0, 0 ,100);
+            // strokeWeight(2);
+            // noFill();
+            // line( (displayWidth-((displayHeight-100)/2+50)) - (r *((s1Divergence[listNum]+1)*0.5)), displayHeight/2, (displayWidth-((displayHeight-100)/2)), displayHeight/2);
+            // fill(0, 0, 100);
+
+            // textFont(title);
+            // textAlign(RIGHT);
+            // text("name", displayWidth-((displayHeight-100)/2+50), displayHeight/2-50);
+            // textFont(number);
+            // text(name[listNum], displayWidth-((displayHeight-100)/2+50), displayHeight/2-25);
+
             textFont(title);
             textAlign(RIGHT);
             text("Clade", displayWidth-((displayHeight-100)/2+50), displayHeight/2);
@@ -82,6 +93,12 @@ class UIs {
             text("Divergence", displayWidth-((displayHeight-100)/2+50), displayHeight/2+130);
             textFont(number);
             text(divergence[listNum] , displayWidth-((displayHeight-100)/2+50), displayHeight/2+155);
+
+            // textFont(title);
+            // text("S-1Divergence", displayWidth-((displayHeight-100)/2+50), displayHeight/2+130);
+            // textFont(number);
+            // text(divergence[listNum] , displayWidth-((displayHeight-100)/2+50), displayHeight/2+155);
+
 
             textFont(title);
             text("Country", displayWidth-((displayHeight-100)/2+50), displayHeight/2+200);
@@ -149,5 +166,8 @@ class UIs {
         if(trigger) {
             scallPointPos.set( mouseX, scallPointPos.y );
         }
+    }
+
+    void circleScallLine() {
     }
 }

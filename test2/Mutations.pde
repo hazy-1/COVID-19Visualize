@@ -27,12 +27,8 @@ class Mutations {
                     // mutToNum(spliter[j]);
                     mutData[i-1][j] = mutToNum(spliter[j]);
                 }
-            }
-
-            
+            }            
         }
-
-        // println(mutData[4]);
     }
 
     // 変化量文字列(A123Tなど)を変化量定数に変換

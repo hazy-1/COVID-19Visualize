@@ -13,12 +13,13 @@ class CovidMap {
         cladeListNum = 29;
         cladeList = new String[cladeListNum];
         clade = new String[tableLength];
-
+        
+        //名前の初期設定
+        name = new String[tableLength];
         //世代の初期設定
         divergence = new float[tableLength];
         //s1の初期設定
         s1Divergence = new float[tableLength];
-
         //日付の初期設定
         period = new String[tableLength];
         //日数の格納庫
@@ -29,7 +30,7 @@ class CovidMap {
 
         //国ラベルの初期化
         country = new String[tableLength];
-        
+
         pointCoord = new PVector[tableLength]; 
 
         mapPos.beginDraw();
@@ -58,6 +59,9 @@ class CovidMap {
             cal.add(Calendar.DATE, 1);
         }
         for(int i = 1; i <= tableLength; i++) {
+             //世代数の抽出
+            data = strains.getString(i, 1);
+            name[i-1] = data;
             //世代数の抽出
             data = strains.getString(i, 7);
             divergence[i-1] = float(data);

@@ -13,6 +13,9 @@ int tableLength;
 int displayX, displayY;
 float dist = 0;
 
+//21569-23605
+//名前
+String[] name;  
 //日付
 String[] period;  
 String[] country;
